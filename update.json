@@ -1,6 +1,6 @@
 {
   "version_code": 2,
   "version_name": "1.0.1",
-  "download_url": "https://tesa-psi.vercel.app/api/update/plugin/main.lua",
+  "download_url": "https://raw.githubusercontent.com/lovesensari-coder/technology-library/main/plug-in%20/main.lua",
   "changelog": "Menambahkan fitur update otomatis."
 }
