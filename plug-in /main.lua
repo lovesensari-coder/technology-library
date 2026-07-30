@@ -277,7 +277,7 @@ local function fetchLanguages()
         import "java.io.InputStreamReader"
         local res = ""
         pcall(function()
-            local url = URL("https://tesa-psi.vercel.app/api/languages")
+            local url = URL("http://botspark.de1.octavia.id:25701/api/languages")
             local conn = url.openConnection()
             conn.setConnectTimeout(10000)
             conn.setReadTimeout(10000)
@@ -3885,7 +3885,7 @@ local function showSettingsDialog()
                     local code = -1
                     local resBody = ""
                     pcall(function()
-                        local urlStr = "https://tesa-psi.vercel.app/api/resetPassword"
+                        local urlStr = "http://botspark.de1.octavia.id:25701/api/resetPassword"
                         local data = "email=" .. URLEncoder.encode(t_email, "UTF-8")
                         local url = URL(urlStr)
                         local conn = url.openConnection()
@@ -5747,7 +5747,7 @@ views.sendButton.onClick = function()
                 import "java.net.URLEncoder"
                 local code = -1
                 pcall(function()
-                    local urlStr = "https://tesa-psi.vercel.app/api/sendMessage"
+                    local urlStr = "http://botspark.de1.octavia.id:25701/api/sendMessage"
                     local data = "text=" .. URLEncoder.encode(t_text, "UTF-8")
                     local url = URL(urlStr)
                     local conn = url.openConnection()
@@ -5889,7 +5889,7 @@ views.btnSendRecord.onClick = function()
                 import "java.net.URLEncoder"
                 local code = -1
                 pcall(function()
-                    local urlStr = "https://tesa-psi.vercel.app/api/sendMessage"
+                    local urlStr = "http://botspark.de1.octavia.id:25701/api/sendMessage"
                     local data = "text=" .. URLEncoder.encode(t_text, "UTF-8")
                     local url = URL(urlStr)
                     local conn = url.openConnection()
@@ -5926,7 +5926,7 @@ views.btnSendRecord.onClick = function()
                     local lineEnd = "\r\n"
                     local twoHyphens = "--"
                     
-                    local url = URL("https://tesa-psi.vercel.app/api/sendVoice")
+                    local url = URL("http://botspark.de1.octavia.id:25701/api/sendVoice")
                     local conn = url.openConnection()
                     conn.setConnectTimeout(15000)
                     conn.setReadTimeout(15000)
@@ -6153,7 +6153,7 @@ pollRunnable = Runnable{
             local dl_json = JSONObject()
             
             pcall(function()
-                local urlStr = "https://tesa-psi.vercel.app/api/getUpdates?offset=" .. tostring(t_last_id)
+                local urlStr = "http://botspark.de1.octavia.id:25701/api/getUpdates?offset=" .. tostring(t_last_id)
                 local url = URL(urlStr)
                 local conn = url.openConnection()
                 conn.setConnectTimeout(10000)
@@ -6187,7 +6187,7 @@ pollRunnable = Runnable{
                                 
                                 local res_path = t_dir_path .. "/voice_recv_" .. f_id .. ".ogg"
                                 if not File(res_path).exists() then
-                                    local d_url = URL("https://tesa-psi.vercel.app/api/getFileUrl?file_id=" .. f_id)
+                                    local d_url = URL("http://botspark.de1.octavia.id:25701/api/getFileUrl?file_id=" .. f_id)
                                     local d_conn = d_url.openConnection()
                                     local d_in = BufferedReader(InputStreamReader(d_conn.getInputStream()))
                                     local d_body = d_in.readLine()
@@ -6452,7 +6452,7 @@ local function startMainApp()
         local code = -1
         local resBody = ""
         pcall(function()
-            local urlStr = "https://tesa-psi.vercel.app/api/verifyToken"
+            local urlStr = "http://botspark.de1.octavia.id:25701/api/verifyToken"
             local data = "token=" .. URLEncoder.encode(t_token, "UTF-8")
             local url = URL(urlStr)
             local conn = url.openConnection()
@@ -6494,7 +6494,7 @@ local function startMainApp()
                     local rcode = -1
                     local rbody = ""
                     pcall(function()
-                        local urlStr = "https://tesa-psi.vercel.app/api/refreshToken"
+                        local urlStr = "http://botspark.de1.octavia.id:25701/api/refreshToken"
                         local data = "refreshToken=" .. URLEncoder.encode(t_rtoken, "UTF-8")
                         local url = URL(urlStr)
                         local conn = url.openConnection()
@@ -6781,7 +6781,7 @@ function showAuthDialog()
             local code = -1
             local resBody = ""
             pcall(function()
-                local urlStr = "https://tesa-psi.vercel.app/api/" .. t_end
+                local urlStr = "http://botspark.de1.octavia.id:25701/api/" .. t_end
                 local data = "email=" .. URLEncoder.encode(t_email, "UTF-8") .. "&password=" .. URLEncoder.encode(t_pass, "UTF-8")
                 local url = URL(urlStr)
                 local conn = url.openConnection()
@@ -6931,7 +6931,7 @@ function showAuthDialog()
             local code = -1
             local resBody = ""
             pcall(function()
-                local urlStr = "https://tesa-psi.vercel.app/api/resetPassword"
+                local urlStr = "http://botspark.de1.octavia.id:25701/api/resetPassword"
                 local data = "email=" .. URLEncoder.encode(t_email, "UTF-8")
                 local url = URL(urlStr)
                 local conn = url.openConnection()
