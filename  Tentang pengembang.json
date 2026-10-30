@@ -9,11 +9,11 @@ local Intent = luajava.bindClass("android.content.Intent")
 local Uri = luajava.bindClass("android.net.Uri")
 local Gravity = luajava.bindClass("android.view.Gravity")
 
--- Membuat Layout Utama
 local layout = LinearLayout(service)
 layout.setOrientation(1)
 layout.setPadding(60, 60, 60, 60)
 layout.setBackgroundColor(Color.parseColor("#F3F4F6"))
+layout.setLayoutParams(LinearLayout.LayoutParams(-1, -1))
 
 local title = TextView(service)
 title.setText("Tentang Pengembang")
@@ -34,7 +34,6 @@ descParams.setMargins(0, 0, 0, 50)
 desc.setLayoutParams(descParams)
 layout.addView(desc)
 
--- Tombol WhatsApp
 local btnWa = Button(service)
 btnWa.setText("Hubungi WhatsApp")
 btnWa.setAllCaps(false)
@@ -56,7 +55,6 @@ btnWa.setOnClickListener(luajava.createProxy("android.view.View$OnClickListener"
 }))
 layout.addView(btnWa)
 
--- Menampilkan Dialog
 local dialog = AlertDialog.Builder(service)
 dialog.setView(layout)
 dialog.setCancelable(true)
@@ -65,5 +63,6 @@ alert.getWindow().setType(2032)
 alert.show()
 
 local window = alert.getWindow()
-window.setLayout(-1, -2)
+window.setLayout(-1, -1)
 window.setBackgroundDrawable(ColorDrawable(Color.parseColor("#F3F4F6")))
+window.getDecorView().setPadding(0, 0, 0, 0)
