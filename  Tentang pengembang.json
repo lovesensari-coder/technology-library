@@ -1,3 +1,5 @@
+local mainAlert = ... -- Menerima perintah dari aplikasi utama
+
 local LinearLayout = luajava.bindClass("android.widget.LinearLayout")
 local TextView = luajava.bindClass("android.widget.TextView")
 local Button = luajava.bindClass("android.widget.Button")
@@ -8,8 +10,6 @@ local AlertDialog = luajava.bindClass("android.app.AlertDialog")
 local Intent = luajava.bindClass("android.content.Intent")
 local Uri = luajava.bindClass("android.net.Uri")
 local Gravity = luajava.bindClass("android.view.Gravity")
-
-local alert = nil
 
 local layout = LinearLayout(service)
 layout.setOrientation(1)
@@ -31,11 +31,6 @@ btnBack.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL)
 local btnBackParams = LinearLayout.LayoutParams(-2, -2)
 btnBackParams.setMargins(0, 0, 30, 0)
 btnBack.setLayoutParams(btnBackParams)
-btnBack.setOnClickListener(luajava.createProxy("android.view.View$OnClickListener", {
-    onClick = function(v)
-        if alert then alert.dismiss() end
-    end
-}))
 topLayout.addView(btnBack)
 
 local title = TextView(service)
@@ -70,21 +65,32 @@ btnWa.setBackgroundDrawable(bgWa)
 local btnWaParams = LinearLayout.LayoutParams(-1, -2)
 btnWaParams.setMargins(0, 0, 0, 30)
 btnWa.setLayoutParams(btnWaParams)
+layout.addView(btnWa)
+
+-- MEMBUAT DIALOG TERLEBIH DAHULU SEBELUM MEMBERIKAN FUNGSI KLIK
+local dialog = AlertDialog.Builder(service)
+dialog.setView(layout)
+dialog.setCancelable(true)
+local alert = dialog.create()
+
+-- SEKARANG KITA PASANG FUNGSI KLIK (Karena "alert" sudah berhasil terbentuk)
+btnBack.setOnClickListener(luajava.createProxy("android.view.View$OnClickListener", {
+    onClick = function(v)
+        alert.dismiss() -- Hanya menutup pop-up info pengembang
+    end
+}))
 
 btnWa.setOnClickListener(luajava.createProxy("android.view.View$OnClickListener", {
     onClick = function(v)
-        if alert then alert.dismiss() end
+        alert.dismiss() -- Menutup pop-up info pengembang
+        if mainAlert then mainAlert.dismiss() end -- Menutup pop-up pengaturan di baliknya
+        
         local intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://wa.me/6281234567890"))
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         service.startActivity(intent)
     end
 }))
-layout.addView(btnWa)
 
-local dialog = AlertDialog.Builder(service)
-dialog.setView(layout)
-dialog.setCancelable(true)
-alert = dialog.create()
 alert.getWindow().setType(2032)
 alert.show()
 
