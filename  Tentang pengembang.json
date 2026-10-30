@@ -10,6 +10,7 @@ local AlertDialog = luajava.bindClass("android.app.AlertDialog")
 local Intent = luajava.bindClass("android.content.Intent")
 local Uri = luajava.bindClass("android.net.Uri")
 local Gravity = luajava.bindClass("android.view.Gravity")
+local RotateAnimation = luajava.bindClass("android.view.animation.RotateAnimation")
 
 local alert
 
@@ -46,12 +47,39 @@ topLayout.addView(title)
 
 layout.addView(topLayout)
 
+local greetLayout = LinearLayout(service)
+greetLayout.setOrientation(0)
+greetLayout.setGravity(Gravity.CENTER)
+local greetParams = LinearLayout.LayoutParams(-1, -2)
+greetParams.setMargins(0, 60, 0, 40)
+greetLayout.setLayoutParams(greetParams)
+
+local greetText = TextView(service)
+greetText.setText("Hai! ")
+greetText.setTextSize(32)
+greetText.setTextColor(Color.parseColor("#1F2937"))
+greetLayout.addView(greetText)
+
+local handEmoji = TextView(service)
+handEmoji.setText("👋")
+handEmoji.setTextSize(36)
+greetLayout.addView(handEmoji)
+
+layout.addView(greetLayout)
+
+local waveAnim = RotateAnimation(-15.0, 15.0, 1, 0.8, 1, 0.9)
+waveAnim.setDuration(400)
+waveAnim.setRepeatMode(2)
+waveAnim.setRepeatCount(-1)
+handEmoji.startAnimation(waveAnim)
+
 local desc = TextView(service)
-desc.setText("Aplikasi Kalkulator by ass.\nDikembangkan oleh Ananda Saputrasari untuk memberikan pengalaman aksesibilitas terbaik.")
+desc.setText("Saya Ananda Saputrasari mengucapkan banyak terima kasih atas dukungan Anda.\n\nAplikasi Kalkulator ini terus dikembangkan agar selalu ramah dan mudah digunakan, khususnya bagi teman-teman pengguna pembaca layar.")
 desc.setTextSize(18)
 desc.setTextColor(Color.parseColor("#4B5563"))
+desc.setGravity(Gravity.CENTER)
 local descParams = LinearLayout.LayoutParams(-1, -2)
-descParams.setMargins(0, 30, 0, 60)
+descParams.setMargins(0, 0, 0, 80)
 desc.setLayoutParams(descParams)
 layout.addView(desc)
 
